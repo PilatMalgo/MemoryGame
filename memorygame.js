@@ -45,20 +45,66 @@ const init = function(x){
     //      })
     //  }, 2000)
 }
+//funkcja clickCard, która będzie uruchamiana każdorazowo 
+ //po kliknięciu w jeden kwadrat
+function clickCard(activeCard) {
+	console.log("clickCard");
+		//if (activeCard == activeCards[0]) return;
+
+	activeCard.classList.remove("hidden");
+
+	console.log(activeCard);
+	//jeśli pierwsze klikniecie
+	if(activeCards.length === 0) {
+			activeCards [0] = activeCard;
+			console.log("1");
+			return;
+	}
+	//jeśli drugie klikniecie
+	else {
+		console.log("2");
+		cards.forEach(card => card.removeEventListener("click", clickCard))
+		activeCards[1] = activeCard;
+		//console.log(activeCards)
+		
+	setTimeout(function (){
+		if(activeCards[0].className === activeCards[1].className ){
+			console.log('wygrana')
+			activeCards.forEach(card => card.classList.add("off"))
+			gameResult++;
+			cards = cards.filter(card => !card.classList.contains("off"));
+				if(gameResult == gamePairs) {
+					const endTime = new Date().getTime();
+					const gameTime = (endTime - startTime)/1000
+					alert(`Brawo! Twój wynik to: ${gameTime} sekund`)
+					location.reload();
+				} 
+		 }
+		else{
+			console.log("przegrana")
+			activeCards.forEach(card => card.classList.add("hidden"))
+			}
+			activeCard ="";
+			activeCards.length = 0;
+			cards.forEach(card => card.addEventListener("click", clickCard))
+		}, 500)
+		}
+		
+};
 
 function boardClickManager(event) {
-
-    if(event.target.classList.contains('matched') || "visible"){
+    if(event.target.classList.contains('matched') || event.target.classList.contains('visible') ){
+		console.log("aaa");
         return;
     } else {
-        console.log(event);
+		clickCard(event.target);
     }
 }
 
 function generateCard(card, container) {
     var div = document.createElement("div");
+	div.setAttribute("class", "hidden");
     div.classList.add(card);
-
     container.appendChild(div);
 }
 
@@ -67,6 +113,8 @@ const generateTable = function(n, m){
     for (i = 0; i< n*m; i++){
         //console.log ("dodaje div");
         var div = document.createElement("div");
+		div.setAttribute("class", "hidden");
+
         cos.appendChild(div);
     }
 }
@@ -83,54 +131,44 @@ function shuffle(a) {
     return a;
 }
 
-//funkcja clickCard, która będzie uruchamiana każdorazowo 
- //po kliknięciu w jeden kwadrat
- const clickCard = function() {
-    activeCard = this;
 
-    if (activeCard == activeCards[0]) return;
 
-    activeCard.classList.remove("hidden");
-
-//jeśli pierwsze klikniecie
-if(activeCards.length === 0) {
-        activeCards [0] = activeCard;
-        console.log("1");
-        return;
-}
-//jeśli drugie klikniecie
-else {
-    console.log("2");
-    cards.forEach(card => card.removeEventListener("click", clickCard))
-    activeCards[1] = activeCard;
-    //console.log(activeCards)
-    
-setTimeout(function (){
-    if(activeCards[0].className === activeCards[1].className ){
-        console.log('wygrana')
-        activeCards.forEach(card => card.classList.add("off"))
-        gameResult++;
-        cards = cards.filter(card => !card.classList.contains("off"));
-            if(gameResult == gamePairs) {
-                const endTime = new Date().getTime();
-                const gameTime = (endTime - startTime)/1000
-                alert(`Brawo! Twój wynik to: ${gameTime} sekund`)
-                location.reload();
-            } 
-     }
-    else{
-        console.log("przegrana")
-        activeCards.forEach(card => card.classList.add("hidden"))
-        }
-        activeCard ="";
-        activeCards.length = 0;
-        cards.forEach(card => card.addEventListener("click", clickCard))
-    }, 500)
-    }
-    
-};
 
 window.onload = function () {
-    init(20);
+	
+	//listener dla buttona menu
+document.getElementById("start_game").addEventListener("click", function(){
+  //pobieram level z selecta w HTML
+  var sel = document.getElementById("game_level");
+  var level = sel.options[sel.selectedIndex];
+  
+//odpalam gre z wybranym poziomem
+
+var cardsNumber = 6;
+console.log(level.value);
+
+if (level.value == "easy"){
+	cardsNumber = 6;
+	console.log(level.value);
+}
+else if (level.value == "medium") {
+	cardsNumber = 12;
+	console.log(level.value);
+}
+else if (level.value == "hard") {
+	cardsNumber = 18;
+	console.log(level.value);
+}
+ init(cardsNumber);
+  
+ 
+//chowam menu 
+  var menu = document.getElementById("menu");
+  menu.style.display = 'none';
+  
+});
+
+	
+    
 };
 
