@@ -12,10 +12,18 @@ body {
     width: 80px; 
     height: 50px;
     border: 2px solid grey;
+    font-family: pacifico;
+    font-size: 30px;
+    text-align: center;
+    font-family: amatic sc;
 }
 #start_game{
-    width: 100px;
-    height: 50px;
+    width: 200px;
+    height: 70px;
+    background-color: transparent;
+    color: white;
+    font-size: 30px;
+    font-family: pacifico;
 }
 
 #main{
