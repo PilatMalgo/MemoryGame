@@ -130,21 +130,11 @@ function start_game(e){
 	//odpalam gre z wybranym poziomem
 
 	var cardsNumber = 6;
-	console.log(level.value);
+	
+	config = {easy: 3, medium: 6, hard: 9}
+	cardsNumber = config[level.value]
 
-	if (level.value == "easy"){
-		cardsNumber = 3;
-		console.log(level.value);
-	}
-	else if (level.value == "medium") {
-		cardsNumber = 6;
-		console.log(level.value);
-	}
-	else if (level.value == "hard") {
-		cardsNumber = 9;
-		console.log(level.value);
-	}
-	 init(cardsNumber);
+	init(cardsNumber);
 	  
 	 
 	//chowam menu 
