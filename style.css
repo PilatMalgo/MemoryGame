@@ -6,7 +6,7 @@
 }
 
 body {
-    background: url("forest.jpg") repeat fixed center ;
+    background: url("forest2.jpg") repeat fixed center ;
     background-size: cover;
 }
 #game_level{
@@ -46,7 +46,7 @@ position: fixed;
 width: 100%;
 height: 100%;
 text-align: center;
-background-image: url("forest.jpg") ;
+background-image: url("forest2.jpg") ;
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;	
@@ -59,12 +59,12 @@ background-repeat: no-repeat;
         margin: 17px;
     }
     #menu{
-        background-image: url("forest.jpg") ;
+        background-image: url("forest2.jpg") ;
         background-size: cover;
         background-position: center; 
     }
     body {
-        background: url("forest.jpg");
+        background: url("forest2.jpg");
         background-repeat: repeat;
     }
     

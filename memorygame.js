@@ -7,16 +7,13 @@ let cardsNumber;
 let cards = ""; 
 
 const startTime = new Date().getTime();
-//console.log(startTime)
 
-//aktywny element 
 let activeCard = "";
-//zmienna przechowująca parę kart będąca tablicą
+
 const activeCards = []; 
 
 let gameResult = 0;
 
-//tworze funkcje nadajace kolory wywolanym divom
 const init = function(x){
     cardsNumber = x; 
     const $container = document.getElementById("main");
@@ -27,31 +24,30 @@ const init = function(x){
     })
     $container.addEventListener('click', boardClickManager);
 }
-//funkcja clickCard, która będzie uruchamiana każdorazowo 
- //po kliknięciu w jeden kwadrat
+
 function clickCard(activeCard) {
 
 	if (!activeCard.classList.contains("off")){
 		console.log("clickCard");
-			//if (activeCard == activeCards[0]) return;
+			
 
 		activeCard.classList.remove("hidden");
 
 		console.log(activeCard);
-		//jeśli pierwsze klikniecie
+		
 	
 		if(activeCards.length === 0) {
 				activeCards [0] = activeCard;
 				console.log("1");
 				return;
 		}
-		//jeśli drugie klikniecie
+		
 		else {
 			
 			console.log("2");
 			document.getElementById("main").removeEventListener("click", clickCard);
 			activeCards[1] = activeCard;
-			//console.log(activeCards)
+			
 		
 			setTimeout(function (){
 				if(activeCards[0].className === activeCards[1].className ){
@@ -64,7 +60,7 @@ function clickCard(activeCard) {
 						const endTime = new Date().getTime();
 						const gameTime = (endTime - startTime) / 1000
 						alert(`Great Job! Time: ${gameTime} sec`)
-						//location.reload();
+						
 					}
 				 }
 				 
@@ -123,12 +119,11 @@ function shuffle(a) {
 }
 
 function start_game(e){
-  //pobieram level z selecta w HTML
+  
   var sel = document.getElementById("game_level");
   var level = sel.options[sel.selectedIndex];
 	  
-	//odpalam gre z wybranym poziomem
-
+	
 	var cardsNumber = 6;
 	
 	config = {easy: 3, medium: 6, hard: 9}
@@ -137,7 +132,7 @@ function start_game(e){
 	init(cardsNumber);
 	  
 	 
-	//chowam menu 
+	
 	  var menu = document.getElementById("menu");
 	  menu.style.display = 'none';
 }
@@ -145,7 +140,7 @@ function start_game(e){
 
 
 window.onload = function () {	
-	//listener dla buttona menu
+	
 	document.getElementById("start_game").addEventListener("click", function(){
 		start_game();
 	});
